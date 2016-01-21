@@ -1,6 +1,12 @@
 {% for note in notes %}
-	<div class='note'>
-		<h3 class='title'>{{ note['title'] }}</h3>
+<div class='note'>
+	<form action='/notes/update' method='post'>
+		<input type='hidden' value='{{ note['id'] }}' name='id'>
+		<div class='title-text'>
+			<input type='hidden' name='title' value='{{ note['title']}}'>
+			<h3 class='title-h3'>{{ note['title'] }}</h3>
+		</div>
 		<textarea name='description' class='description'>{{ note['description'] }}</textarea>
-	</div>
+	</form>
+</div>
 {% endfor %}

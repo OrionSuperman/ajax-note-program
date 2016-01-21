@@ -15,7 +15,7 @@ class Notes(Controller):
         
     def index(self):
         notes = self.models['Note'].all()
-        return self.load_view('index.html')
+        return self.load_view('index.html', notes=notes)
 
     def index_html(self):
         notes = self.models['Note'].all()
@@ -23,25 +23,28 @@ class Notes(Controller):
 
     def create(self):
         new_note = {
-            'description' : request.form['description'],
             'title' : request.form['title']
         }
         self.models['Note'].create(new_note)
-        notes = self.models['Notes'].all()
+        notes = self.models['Note'].all()
         return self.load_view('/partials/notes.html', notes=notes)
 
     def update(self):
+        print "HIT"
+        print request.form
+        print "HIT 2"
         note_update = {
             'description' : request.form['description'],
-            'title' : request.form['title']
+            'title' : request.form['title'],
             'id' : request.form['id']
         }
+        print note_update
         self.models['Note'].update(note_update)
-        notes = self.models['Notes'].all()
+        notes = self.models['Note'].all()
         return self.load_view('/partials/notes.html', notes=notes)
 
     def delete(self):
         self.models['Note'].delete(request.form['id'])
-        notes = self.models['Notes'].all()
+        notes = self.models['Note'].all()
         return self.load_view('/partials/notes.html', notes=notes)
 

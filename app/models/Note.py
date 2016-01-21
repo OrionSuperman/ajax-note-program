@@ -18,9 +18,21 @@ class Note(Model):
         return self.db.query_db(query)
 
     def create(self, new_note):
-        query = "INSERT INTO notes (title, description, created_at, updated_at) VALUES (%s, %s, NOW(), NOW())"
-        data = [new_note['title'], new_note['description']]
+        query = "INSERT INTO notes (title, created_at, updated_at) VALUES (%s, NOW(), NOW())"
+        data = [new_note['title']]
         return self.db.query_db(query, data)
+
+    def update(self, note_update):
+        query = "UPDATE notes SET title=%s, description=%s, updated_at=NOW() WHERE id=%s"
+        data = [note_update['title'], note_update['description'], note_update['id']]
+        print query
+        print data
+        self.db.query_db(query, data)
+
+    def delete(self, id):
+        query = "DELETE FROM notes WHERE id=%s"
+        data = [id]
+        self.db.query_db(query,data)
 
     """
     Below is an example of a model method that queries the database for all users in a fictitious application
