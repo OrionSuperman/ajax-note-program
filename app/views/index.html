@@ -41,7 +41,7 @@
 				return false;
 			});
 
-			$(".title-text").click(function(){
+			$(".title-text").on('click', '.title-text', function() {
 				if ($(this).find(".title-h3").length>0){
 					$(this).html("<input class='title' type='text' name='title'>")
 				}
@@ -65,6 +65,11 @@
 <body>
 	
 	<h1>Notes</h1>
+	<form action='/notes/create' method='POST'>
+		<p>New Note Title:</p>
+		<input type='text' name='title'>
+		<input class='create' type='submit' value='Create'>
+	</form>
 
 	<div id="notes">
 		{% for note in notes %}
@@ -84,9 +89,6 @@
 		</div>
 		{% endfor %}
 	</div>
-	<form action='/notes/create' method='POST'>
-		<input type='text' name='title'>
-		<input class='create' type='submit' value='Create'>
-	</form>
+
 </body>
 </html>

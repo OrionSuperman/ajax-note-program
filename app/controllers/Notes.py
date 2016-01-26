@@ -22,26 +22,35 @@ class Notes(Controller):
         return self.load_view('/partials/notes.html', notes=notes)
 
     def create(self):
-        new_note = {
-            'title' : request.form['title']
-        }
-        self.models['Note'].create(new_note)
-        notes = self.models['Note'].all()
-        return self.load_view('/partials/notes.html', notes=notes)
+        try:
+            request.form['title']
+            new_note = {
+                'title' : request.form['title']
+            }
+            self.models['Note'].create(new_note)
+            notes = self.models['Note'].all()
+            return self.load_view('/partials/notes.html', notes=notes)
+        except:
+            notes = self.models['Note'].all()
+            return self.load_view('/partials/notes.html', notes=notes)
 
     def update(self):
-        print "HIT"
-        print request.form
-        print "HIT 2"
-        note_update = {
-            'description' : request.form['description'],
-            'title' : request.form['title'],
-            'id' : request.form['id']
-        }
-        print note_update
-        self.models['Note'].update(note_update)
-        notes = self.models['Note'].all()
-        return self.load_view('/partials/notes.html', notes=notes)
+        try:
+            request.form['title']
+            request.form['id']
+            note_update = {
+                'description' : request.form['description'],
+                'title' : request.form['title'],
+                'id' : request.form['id']
+            }
+            print note_update
+            self.models['Note'].update(note_update)
+            notes = self.models['Note'].all()
+            return self.load_view('/partials/notes.html', notes=notes)
+        except: 
+
+            notes = self.models['Note'].all()
+            return self.load_view('/partials/notes.html', notes=notes)
 
     def delete(self):
         self.models['Note'].delete(request.form['id'])

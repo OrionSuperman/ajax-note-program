@@ -8,5 +8,9 @@
 		</div>
 		<textarea name='description' class='description'>{{ note['description'] }}</textarea>
 	</form>
+	<form action='/notes/delete' method='post'>
+		<input type='hidden' name='id' value='{{note.id}}'>
+		<input class='delete' type='submit' value='Delete Note'>
+	</form>	
 </div>
 {% endfor %}
